@@ -21,6 +21,8 @@ public class images {
 	@Transient
 	private MultipartFile image;
 
+	private String userid_password;
+
 	public Long getId() {
 		return Id;
 	}
@@ -35,5 +37,13 @@ public class images {
 
 	public void setImage(MultipartFile image) {
 		this.image = image;
+	}
+
+	public String getUserid_password() {
+		return userid_password;
+	}
+
+	public void setUserid_password(String userid_password) {
+		this.userid_password = userid_password;
 	}
 }
