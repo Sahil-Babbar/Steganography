@@ -13,6 +13,18 @@
   <link rel="stylesheet" th:href="@{css/main.css}" />
   <link rel="stylesheet" th:href="@{css/Animate.css}" />
   <title>Stegno-bla-bla</title>
+    <style>
+         body{
+               @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200&family=Play&display=swap');
+                background-image:linear-gradient(to right,rgba(0,0,0,0.8),rgba(0,0,0,0.4)),url('https://wallpaperaccess.com/full/2454628.png');
+                background-size:100% 100%;
+                background-position:center;
+                background-attachment:fixed;
+                color:white;
+                font-weight:700;
+                font-family: 'Play', sans-serif;
+         }
+    </style>
 </head>
 
 <body>
@@ -56,9 +68,9 @@
             <source th:src="@{Audio/} + ${id} + '.WAV' ">
           </audio>
     </div>
-            <form th:action="@{/decode}" method = "POST">
-    <div class="row">
 
+    <div class="col">
+        <form th:action="@{/decode}" method = "POST">
         <div class="col s12 m8 l6 offset-m2 offset-l3 center input-field">
 
             <label for="user_id">user_id</label>
@@ -73,38 +85,39 @@
           <br />
           <input type="submit" class="btn">
         </div>
+        </form>
       </div>
-    </form>
+
   </div>
 
  </section>
-  <section class="">
-      <!-- Footer -->
-      <footer class="text-center text-white" style="background-color: #0a4275;">
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-              <!-- Section: CTA -->
-              <section class="">
-                  <p class="d-flex justify-content-center align-items-center">
-                      <span class="me-3">Register for free</span>
-                      <button type="button" class="btn btn-outline-light btn-rounded">
-                          Sign up!
-                      </button>
-                  </p>
-              </section>
-              <!-- Section: CTA -->
-          </div>
-          <!-- Grid container -->
+<!--  <section class="">-->
+<!--      &lt;!&ndash; Footer &ndash;&gt;-->
+<!--      <footer class="text-center text-white" style="background-color: #0a4275;">-->
+<!--          &lt;!&ndash; Grid container &ndash;&gt;-->
+<!--          <div class="container p-4 pb-0">-->
+<!--              &lt;!&ndash; Section: CTA &ndash;&gt;-->
+<!--              <section class="">-->
+<!--                  <p class="d-flex justify-content-center align-items-center">-->
+<!--                      <span class="me-3">Register for free</span>-->
+<!--                      <button type="button" class="btn btn-outline-light btn-rounded">-->
+<!--                          Sign up!-->
+<!--                      </button>-->
+<!--                  </p>-->
+<!--              </section>-->
+<!--              &lt;!&ndash; Section: CTA &ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash; Grid container &ndash;&gt;-->
 
-          <!-- Copyright -->
-          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-              © 2020 Copyright:
-              <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-          </div>
-          <!-- Copyright -->
-      </footer>
-      <!-- Footer -->
-  </section>
+<!--          &lt;!&ndash; Copyright &ndash;&gt;-->
+<!--          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">-->
+<!--              © 2020 Copyright:-->
+<!--              <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; Copyright &ndash;&gt;-->
+<!--      </footer>-->
+<!--      &lt;!&ndash; Footer &ndash;&gt;-->
+<!--  </section>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
   <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js "></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js "></script>
