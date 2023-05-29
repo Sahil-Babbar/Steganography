@@ -9,9 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.stegnography.Repository.UserRepository;
 import com.stegnography.domain.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.stegnography.imageService.imageService;
 import com.stegnography.utility.MailConstructor;
 
-
+@Slf4j
 @Controller
 public class homeController {
 
@@ -35,21 +40,46 @@ public class homeController {
 	@Autowired
 	private UserRepository userRepository;
 
+
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	String IMAGE_PREFIX = "http://www.inspireglobaleducation.com/images/";
 
 	@RequestMapping(value = "/user")
-	public String login(){
+	public String signup(){
 		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String home(@ModelAttribute User user)
 	{
-		userRepository.save(user);
+		try{
+			String hashPassword= new BCryptPasswordEncoder().encode(user.getPassword());
+			user.setPassword(hashPassword);
+//			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			userRepository.save(user);
+		}
+		catch (DataIntegrityViolationException e){
+			throw new RuntimeException("Email already exists");
+		}
 		return "index";
 	}
 
+	@RequestMapping(value = "/loginuser")
+	public String login(Model model){
+		return "loginuser";
+	}
+	@RequestMapping(value= "/authenticateuser",method = RequestMethod.POST)
+	public String loginUser(@ModelAttribute User user){
+		User user1 = userRepository.findPasswordByEmail(user.getEmail());
+		log.info(user1.getPassword());
+		boolean passwordMatches = new BCryptPasswordEncoder().matches(user.getPassword(), user1.getPassword());
+		if(passwordMatches)
+			return "index";
+		else
+			return "loginuser";
 
+	}
 	@RequestMapping(value = "/images")
 	public String images()
 	{
