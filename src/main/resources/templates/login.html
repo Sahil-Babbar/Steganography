@@ -57,18 +57,14 @@
                             </div>
                             <div class="form-group">
                                 <label class="sb"> Your Phone<span class="req">*</span> </label>
-                                <input type="tel" class="form-control" id="phone" name="phone_no" required data-validation-required-message="Please enter your phone number." autocomplete="off">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <label class="sb">User Id<span class="req">*</span> </label>
-                                <input type="integer" class="form-control" id="user_id" name="id" required data-validation-required-message="Please enter your password" autocomplete="off">
+                                <input type="tel" class="form-control" id="inputNumber" name="phone_no" required data-validation-required-message="Please enter your phone number." autocomplete="off" onkeyup="validateInput()">
+                                <span id="error" style="color: red;"></span>
                                 <p class="help-block text-danger"></p>
                             </div>
 
                             <div class="form-group">
-                                <label class="sb"> Password<span class="req">*</span> </label>
-                                <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                                <label for="password" class="sb"> Password<span class="req">*</span> </label>
+                                <input type="password" class="form-control" id="password" name="password" required data-validation-required-message="Please enter your password" autocomplete="off">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="mrgn-30-top">
@@ -88,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="sb"> Password<span class="req">*</span> </label>
-                                <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                                <input type="password" class="form-control" id="passwordN" required data-validation-required-message="Please enter your password" autocomplete="off">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="mrgn-30-top">
@@ -110,4 +106,21 @@
 </body>
 <!-- partial -->
 <script  src="./script.js"></script>
+<script>
+    function validateInput() {
+      var input = document.getElementById("inputNumber");
+      var error = document.getElementById("error");
+
+      var number = input.value.trim();
+      var isValid = /^\d{10}$/.test(number);
+
+      if (isValid) {
+        // Clear any existing error message
+        error.innerHTML = "";
+      } else {
+        // Display the error message
+        error.innerHTML = "Please enter a 10-digit number.";
+      }
+    }
+  </script>
 </html>

@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" th:href="@{fonts/alphabetized-cassette-tapes/alphabetized cassette tapes.ttf}" />
   <link rel="stylesheet" th:href="@{css/main.css}" />
   <link rel="stylesheet" th:href="@{css/Animate.css}" />
@@ -53,11 +55,12 @@
 
   <section class="section" style = "margin-top : 30px !important">
 
-    <div class = "row">
+    <div class = "container" style="height:40%;">
       <div class = "col s12 m6 l4 offset-m3 offset-l4">
         <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" th:src="@{image/hack.jpg}">
+<!--      <img class="activator" th:src="@{image/hack.jpg}">-->
+      <img class="activator" src="https://bairesdev.mo.cloudinary.net/blog/2023/05/Big-Data-Security-Dont-Let-Hackers-Steal-Your-Cookies.jpg?tx=w_3840,q_auto">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">Secret Message<i class="material-icons right">more_vert</i></span>
