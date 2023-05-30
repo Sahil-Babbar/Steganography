@@ -5,6 +5,7 @@ import com.stegnography.imageService.AudioService;
 import com.stegnography.imageService.TextInsideImage;
 import com.stegnography.imageService.imageService;
 import com.stegnography.utility.MailConstructor;
+import com.stegnography.utility.MailConstructorText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @Controller
 public class TextInImageController {
@@ -27,7 +32,7 @@ public class TextInImageController {
     private JavaMailSender mailSender;
 
     @Autowired
-    private MailConstructor mailconstructer;
+    private MailConstructorText mailconstructer;
 
     @Autowired
     private AudioService audioservice;
@@ -67,10 +72,12 @@ public class TextInImageController {
         String encodedString;
 
         String userid = img.getId().toString();
+        System.out.println("User id is: "+userid);
         try {
             File image1 = imageservice.convert(image);
             byte[] bytes = imageservice.fileresigedbytearray(image1);
-            encodedString = textInsideImage.embedText(bytes,userid, message);
+//            encodedString = textInsideImage.embedText(bytes,userid, message);
+           encodedString = textInsideImage.encode("/home/knoldus/mca/Steganography/beverage-caffeine-cappuccino-849646.jpg",message,"1");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -80,4 +87,30 @@ public class TextInImageController {
         mailSender.send(mailconstructer.constructOrderConfirmationEmail1(userId, encodedString, email));
         return "redirect:/imageenc_confirmation?email=" + email;
     }
+
+    @GetMapping("/imagedecoding")
+    public String decodeaudio(
+            @RequestParam("id") String userid,
+            ModelMap model
+    )
+    {
+        model.addAttribute("id",userid);
+        return "decodeimage";
+    }
+    @PostMapping("/decodeimagee")
+    public String decode(
+            @RequestParam("user_id") String User_id,
+            @RequestParam("password") String pass,
+            ModelMap model
+    ) throws IOException
+    {
+//        File file2 = new File("src/main/resources/static/image/" + User_id + ".jpg");
+//        BufferedImage img = ImageIO.read(file2);
+        String decodedmsg = textInsideImage.decode("/home/knoldus/mca/Steganography/image_text_out.png", "1");
+        System.out.println(decodedmsg);
+        model.addAttribute("decodedmsg" , decodedmsg);
+
+        return "decoded_msg_viewer";
+    }
+
 }
