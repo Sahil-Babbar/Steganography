@@ -100,6 +100,7 @@ public class AudioController {
 		byte[] data1 = new byte[(int) file2.length()];
 	    FileInputStream in  = new FileInputStream(file2);
 	    in.read(data1);
+
 	    String decodedmsg = audioservice.Decode(data1, User_id, pass);
 	    model.addAttribute("decodedmsg" , decodedmsg);
 	     
