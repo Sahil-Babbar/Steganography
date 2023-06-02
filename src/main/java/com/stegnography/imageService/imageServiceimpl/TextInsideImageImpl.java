@@ -22,92 +22,7 @@ public class TextInsideImageImpl implements TextInsideImage {
     private imagesRepository repository;
     @Autowired
     private imageService imageservice;
-//   public String embedText(byte[] data, String User_id, String text) {
-//
-//        BufferedImage image = imageservice.toBufferedImage(data);
-//       int bitMask = 0xFE; // define the mask bit to clear the least significant bit of the pixel
-//       int x = 0; // define the starting pixel x
-//       int y = 0; // define the starting pixel y
-//
-//       for (int i = 0; i < text.length(); i++) {
-//           char c = text.charAt(i); // get the next character from the message
-//           int ascii = (int) c; // get the ASCII value of the character
-//
-//           // 8 digits form a character
-//           for (int j = 0; j < 8; j++) {
-//               int pixel = image.getRGB(x, y);
-//               int bit = (ascii >> (7 - j)) & 0x01; // extract each bit of the character
-//
-//               // Set the least significant bit of the pixel to the extracted bit
-//               int modifiedPixel = (pixel & bitMask) | bit;
-//               image.setRGB(x, y, modifiedPixel);
-//
-//               x++;
-//               if (x >= image.getWidth()) {
-//                   x = 0;
-//                   y++;
-//               }
-//           }
-//       }
-//
-//        // save the image which contains the secret information to another image file
-//        String password = null;
-//        try {
-//            File file2 = new File("src/main/resources/static/image/" + User_id + ".jpg");
-//            FileOutputStream out = new FileOutputStream(file2);
-//            PrintWriter writer = new PrintWriter(file2);
-//            writer.print("");
-//            writer.close();
-//            file2 = new File("src/main/resources/static/image/" + User_id + ".jpg");
-//            out = new FileOutputStream(file2);
-//
-//            out.write(data);
-//            out.close();
-//            System.out.println("Encoded");
-//
-//            password = UUID.randomUUID().toString();
-//            Optional<images> images = repository.findById(Long.parseLong(User_id));
-//            images images1 = images.get();
-//            images1.setUserid_password(User_id + password);
-//
-//            repository.save(images1);
-//
-//        } catch (IOException e) {
-//
-//        }
-//        return password;
-//    }
-//
-//    public String extractText(BufferedImage image, String user_id, String password, int length) {
-//        int bitMask = 0x00000001;   // define the mask bit used to get the digit
-//        int bit;                    // define an integer number to represent the ASCII number of a character
-//        int x = 0;                  // define the starting pixel x
-//        int y = 0;                  // define the starting pixel y
-//        StringBuilder message = new StringBuilder(); // to store the extracted message
-//
-//        for (int i = 0; i < length; i++) {
-//            bit = 0; // reset the bit value for each character
-//
-//            // 8 digits form a character
-//            for (int j = 0; j < 8; j++) {
-//                if (x < image.getWidth()) {
-//                    int pixel = image.getRGB(x, y);
-//                    bit = (bit << 1) | (pixel & bitMask); // extract the least significant bit from the pixel
-//                    x++;
-//                } else {
-//                    x = 0;
-//                    y++;
-//                    int pixel = image.getRGB(x, y);
-//                    bit = (bit << 1) | (pixel & bitMask); // extract the least significant bit from the pixel
-//                }
-//                message.append((char) bit);
-//            }
-//
-//             // append the character to the message
-//        }
-//        System.out.println(message.toString());
-//        return message.toString();
-//    }
+
 
     private static int bytesForTextLengthData = 4;
     private static int bitsInByte = 8;
@@ -138,11 +53,12 @@ public class TextInsideImageImpl implements TextInsideImage {
         if (position > 0) {
             fileName = fileName.substring(0, position);
         }
+        String password = UUID.randomUUID().toString();
 
         //String finalFileName = fileName + "_with_hidden_message.png";
         //System.out.println("Successfully encoded text in: " + finalFileName);
         saveImageToPath(imageInUserSpace, new File("image_text_out.png"),"png");
-        return "1234";
+        return password;
     }
 
     private static byte[] encodeImage(byte[] image, byte[] addition, int offset) {

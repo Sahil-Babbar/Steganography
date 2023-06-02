@@ -75,9 +75,8 @@ public class TextInImageController {
         System.out.println("User id is: "+userid);
         try {
             File image1 = imageservice.convert(image);
-            byte[] bytes = imageservice.fileresigedbytearray(image1);
 //            encodedString = textInsideImage.embedText(bytes,userid, message);
-           encodedString = textInsideImage.encode("/home/knoldus/mca/Steganography/beverage-caffeine-cappuccino-849646.jpg",message,"1");
+            encodedString = textInsideImage.encode("/home/knoldus/mca/Steganography/"+image1,message,"1");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
